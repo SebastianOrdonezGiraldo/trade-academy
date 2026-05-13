@@ -1,3 +1,4 @@
+// Lista de cursos simulada. En una API real, estos datos vendrían de una base de datos.
 const courses = [
     {
       id: 1,
