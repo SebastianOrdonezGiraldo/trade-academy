@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trade Academy | Cursos de Trading</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#inicio">Trade Academy</a>
+
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#inscripcion">Inscripción</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio">
+      <h1>Aprende trading con una ruta clara y práctica</h1>
+      <p>
+        Cursos diseñados para personas que quieren entender los mercados,
+        practicar con criterio y aprender a gestionar el riesgo antes de invertir.
+      </p>
+      <a href="#cursos">Ver cursos disponibles</a>
+    </section>
+
+    <section id="cursos">
+      <h2>Cursos disponibles</h2>
+      <p>Elige el curso que mejor se adapte a tu nivel de experiencia.</p>
+
+      <div id="coursesStatus"></div>
+      <div id="coursesContainer"></div>
+    </section>
+
+    <section id="inscripcion">
+      <h2>Inscríbete a un curso</h2>
+      <p>Completa tus datos y simularemos el registro de tu inscripción.</p>
+
+      <form id="enrollmentForm">
+        <label for="studentName">Nombre completo</label>
+        <input type="text" id="studentName" name="studentName" required />
+
+        <label for="studentEmail">Correo electrónico</label>
+        <input type="email" id="studentEmail" name="studentEmail" required />
+
+        <label for="studentPhone">Teléfono</label>
+        <input type="tel" id="studentPhone" name="studentPhone" required />
+
+        <label for="courseSelect">Curso de interés</label>
+        <select id="courseSelect" name="courseSelect" required>
+          <option value="">Selecciona un curso</option>
+        </select>
+
+        <label for="startDate">Fecha deseada de inicio</label>
+        <input type="date" id="startDate" name="startDate" required />
+
+        <button type="submit" id="submitButton">
+          Confirmar inscripción al curso
+        </button>
+      </form>
+
+      <div id="formStatus"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Trade Academy. Proyecto académico.</p>
+  </footer>
+
+  <script src="./js/mockApi.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
