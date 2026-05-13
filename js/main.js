@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Main logic for Trade Academy.
+ * Handles course loading and rendering, and enrollment form submission.
+ * Depends on `getCourses` and `createEnrollment` defined in mockApi.js.
+ */
+
 const coursesStatus = document.getElementById("coursesStatus");
 const coursesContainer = document.getElementById("coursesContainer");
 const courseSelect = document.getElementById("courseSelect");
@@ -5,12 +11,18 @@ const enrollmentForm = document.getElementById("enrollmentForm");
 const submitButton = document.getElementById("submitButton");
 const formStatus = document.getElementById("formStatus");
 
+/** @type {import('./mockApi').Course[]} Courses loaded from the simulated API. */
 let loadedCourses = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   loadCourses();
 });
 
+/**
+ * Loads courses from the simulated API and updates the DOM.
+ * Displays status messages during loading and on error.
+ * @returns {Promise<void>}
+ */
 async function loadCourses() {
   coursesStatus.textContent = "Cargando cursos disponibles...";
   coursesContainer.innerHTML = "";
@@ -32,6 +44,12 @@ async function loadCourses() {
   }
 }
 
+/**
+ * Renders course cards into the main container.
+ * Each card includes a button that pre-selects the course in the form
+ * and smoothly scrolls to the enrollment section.
+ * @param {import('./mockApi').Course[]} courses - List of courses to render.
+ */
 function renderCourses(courses) {
   coursesContainer.innerHTML = "";
 
@@ -65,6 +83,10 @@ function renderCourses(courses) {
   });
 }
 
+/**
+ * Populates the form `<select>` with the available course options.
+ * @param {import('./mockApi').Course[]} courses - List of courses to add as options.
+ */
 function renderCourseOptions(courses) {
   courses.forEach((course) => {
     const option = document.createElement("option");
@@ -74,6 +96,11 @@ function renderCourseOptions(courses) {
   });
 }
 
+/**
+ * Handles enrollment form submission.
+ * Collects form data, calls `createEnrollment`, and displays the result to the user.
+ * Disables the submit button while the request is in progress.
+ */
 enrollmentForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
