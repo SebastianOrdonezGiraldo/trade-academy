@@ -173,6 +173,76 @@
     padding: 24px;
   }
   
+  /* Filtros por nivel */
+  .filters-container {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background-color: #e2e8f0;
+    color: #475569;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover {
+    background-color: #cbd5e1;
+  }
+
+  .filter-btn.active {
+    background-color: #2563eb;
+    color: white;
+  }
+
+  /* Mis Inscripciones Activas */
+  #enrollmentsStatus {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+
+  #enrollmentsContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .enrollment-card {
+    background-color: white;
+    border-left: 5px solid #10b981;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  }
+
+  .enrollment-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #111827;
+  }
+
+  .enrollment-card p {
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+
+  .btn-danger {
+    background-color: #ef4444;
+    color: white;
+    margin-top: 14px;
+  }
+
+  .btn-danger:hover {
+    background-color: #dc2626;
+  }
+
   /* Diseño responsivo para celular */
   @media (max-width: 768px) {
     header {
@@ -194,7 +264,8 @@
       font-size: 32px;
     }
   
-    #coursesContainer {
+    #coursesContainer,
+    #enrollmentsContainer {
       grid-template-columns: 1fr;
     }
   
@@ -203,4 +274,4 @@
       width: 100%;
       text-align: center;
     }
-  }
+  }
