@@ -15,6 +15,7 @@
         <li><a href="#inicio">Inicio</a></li>
         <li><a href="#cursos">Cursos</a></li>
         <li><a href="#inscripcion">Inscripción</a></li>
+        <li><a href="#mis-inscripciones">Mis Inscripciones</a></li>
       </ul>
     </nav>
   </header>
@@ -32,6 +33,13 @@
     <section id="cursos">
       <h2>Cursos disponibles</h2>
       <p>Elige el curso que mejor se adapte a tu nivel de experiencia.</p>
+
+      <div class="filters-container">
+        <button type="button" class="filter-btn active" data-level="Todos">Todos</button>
+        <button type="button" class="filter-btn" data-level="Principiante">Principiante</button>
+        <button type="button" class="filter-btn" data-level="Intermedio">Intermedio</button>
+        <button type="button" class="filter-btn" data-level="Avanzado">Avanzado</button>
+      </div>
 
       <div id="coursesStatus"></div>
       <div id="coursesContainer"></div>
@@ -66,6 +74,13 @@
 
       <div id="formStatus"></div>
     </section>
+
+    <section id="mis-inscripciones">
+      <h2>Mis Inscripciones Activas</h2>
+      <p>Consulta tus cursos registrados o cancela tu inscripción (Acción Irreversible).</p>
+      <div id="enrollmentsStatus"></div>
+      <div id="enrollmentsContainer"></div>
+    </section>
   </main>
 
   <footer>
@@ -75,4 +90,4 @@
   <script src="./js/mockApi.js"></script>
   <script src="./js/main.js"></script>
 </body>
-</html>
+</html>
