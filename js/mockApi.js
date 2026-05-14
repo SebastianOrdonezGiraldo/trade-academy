@@ -26,9 +26,9 @@
 /**
  * @typedef {Object} EnrollmentResponse
  * @property {number} id - Generated ID for the enrollment.
- * @property {string} status - Operation status ("created").
+ * @property {string} status - Operation status ("created" | "cancelled").
  * @property {string} message - Confirmation message for the user.
- * @property {EnrollmentData} enrollment - Registered enrollment data.
+ * @property {EnrollmentData} [enrollment] - Registered enrollment data.
  */
 
 /** @type {Course[]} */
@@ -64,8 +64,30 @@ const courses = [
     price: 200000,
     duration: "5 semanas",
     description: "Trabaja disciplina, control emocional y toma de decisiones bajo presión."
+  },
+  {
+    id: 5,
+    name: "Masterclass: Criptomonedas y DeFi",
+    level: "Intermedio",
+    price: 220000,
+    duration: "4 semanas",
+    description: "Sumérgete en el ecosistema cripto, finanzas descentralizadas, staking y análisis de proyectos blockchain."
+  },
+  {
+    id: 6,
+    name: "Trading Algorítmico y Bots",
+    level: "Avanzado",
+    price: 280000,
+    duration: "6 semanas",
+    description: "Automatiza tus estrategias de trading utilizando scripts, APIs de exchanges y backtesting avanzado."
   }
 ];
+
+/** 
+ * Almacenamiento en memoria para simular la base de datos de inscripciones activas durante la sesión.
+ * @type {Array<{id: number, enrollment: EnrollmentData}>} 
+ */
+let userEnrollments = [];
 
 /**
  * Returns a promise that resolves after 700 ms, simulating network latency.
@@ -103,6 +125,16 @@ async function getCourses() {
 }
 
 /**
+ * Fetches the list of active enrollments for the current session.
+ * Simulates a GET /enrollments request.
+ * @returns {Promise<Array<{id: number, enrollment: EnrollmentData}>>} List of enrollments.
+ */
+async function getEnrollments() {
+  await simulateDelay();
+  return [...userEnrollments];
+}
+
+/**
  * Registers a new course enrollment.
  * Simulates a POST /enrollments request with delay and possible server error.
  * @param {EnrollmentData} enrollmentData - Data from the enrollment form.
@@ -117,10 +149,47 @@ async function createEnrollment(enrollmentData) {
     throw new Error("No pudimos registrar tu inscripción. Revisa los datos e intenta nuevamente.");
   }
 
-  return {
+  const newEnrollment = {
     id: Date.now(),
+    enrollment: enrollmentData
+  };
+
+  userEnrollments.push(newEnrollment);
+
+  return {
+    id: newEnrollment.id,
     status: "created",
     message: "Tu inscripción fue registrada correctamente.",
     enrollment: enrollmentData
   };
 }
+
+/**
+ * Cancels an active enrollment by its ID.
+ * Simulates a DELETE /enrollments/:id request with delay and possible server error.
+ * @param {number} enrollmentId - ID of the enrollment to cancel.
+ * @returns {Promise<EnrollmentResponse>} Response confirmation.
+ * @throws {Error} If the simulated request fails or ID is not found.
+ */
+async function cancelEnrollment(enrollmentId) {
+  await simulateDelay();
+
+  if (shouldFail()) {
+    console.log("500 Internal Server Error");
+    throw new Error("No pudimos cancelar la inscripción. Intenta nuevamente.");
+  }
+
+  const index = userEnrollments.findIndex((e) => e.id === enrollmentId);
+  if (index === -1) {
+    throw new Error("Inscripción no encontrada.");
+  }
+
+  userEnrollments.splice(index, 1);
+
+  return {
+    id: enrollmentId,
+    status: "cancelled",
+    message: "La inscripción ha sido cancelada exitosamente."
+  };
+}
+
